@@ -1,0 +1,59 @@
+{
+    "applications": [
+        {   "imageURL":"https://www.sandiego.edu/mysandiego/portal/img/avow-app.png",
+            "appName": "Advizor", 
+            "appURL":"http://ssappsprod.sandiego.edu:7003/FacilityHours/faces/hours.jspx",
+            "isSSO": true, 
+            "privateOrPublicCloud": "Private", 
+            "desktopOrMobileApp": "Desktop",
+            "mobileAppLink":"",
+            "moreInfoLink":""
+
+        },
+        {   "imageURL":"https://www.sandiego.edu/mysandiego/portal/img/avow-app.png",
+            "appName": "Cognos", 
+            "appURL":"http://ssappsprod.sandiego.edu:7003/FacilityHours/faces/hours.jspx",
+            "isSSO": false, 
+            "privateOrPublicCloud": "Private", 
+            "desktopOrMobileApp": "Desktop",
+            "mobileAppLink":"",
+            "moreInfoLink":""
+
+        },
+        {   "imageURL":"https://www.sandiego.edu/mysandiego/portal/img/avow-app.png",
+            "appName": "KBACE",
+            "appURL":"http://ssappsprod.sandiego.edu:7003/FacilityHours/faces/hours.jspx", 
+            "isSSO": true, 
+            "privateOrPublicCloud": "Private", 
+            "desktopOrMobileApp": "Desktop",
+            "mobileAppLink":"",
+            "moreInfoLink":""
+            
+
+        },
+        {   "imageURL":"https://www.sandiego.edu/mysandiego/portal/img/avow-app.png",
+            "appName": "Noetix", 
+            "appURL":"http://ssappsprod.sandiego.edu:7003/FacilityHours/faces/hours.jspx",
+            "isSSO": true, 
+            "privateOrPublicCloud": "Private", 
+            "desktopOrMobileApp": "Desktop",
+            "mobileAppLink":"",
+            "moreInfoLink":""
+            
+
+        },
+        {   "imageURL":"https://www.sandiego.edu/mysandiego/portal/img/avow-app.png",
+            "appName": "Oracle Disco Plus", 
+            "appURL":"http://ssappsprod.sandiego.edu:7003/FacilityHours/faces/hours.jspx",
+            "isSSO": true, 
+            "privateOrPublicCloud": "Private", 
+            "desktopOrMobileApp": "Desktop",
+            "mobileAppLink":"",
+            "moreInfoLink":""
+            
+
+        }
+        
+        
+    ]
+}

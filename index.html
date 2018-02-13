@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PortalDev</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+  
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
+</head>
+<script>
+  $(document).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip(); 
+    $('#appStoreTable').DataTable({
+      "paging": false,
+      "bInfo" : false,
+      language: {
+        search: "_INPUT_",
+        searchPlaceholder: " Search for an application"
+    },
+    "dom": 'ft',
+    fixedHeader: true
+    });
+    
+    $('#appStoreTable_filter label').addClass('appStoreFilterLabel');
+    $('#appStoreTable_filter input').addClass('appStoreFilter');
+} );
+
+function popItOver(id) {
+  alert(id); 
+  console.log(this);
+
+}
+/* 
+Get Applicant Pin Start
+
+*/
+
+function getApplicantPIN(target) {
+  
+    alert(target);
+    var pathApplicantPin = "<%= request.getContextPath() %>";
+    var lastname = $("#applicantPINLastname" + target).val();
+    var caidORssn = $("#applicantPINCaidORSSN" + target).val();
+
+
+    var regExpressionForNumbersOnly = /^[0-9]+$/;
+    //alphabet and space are allowed for lastnames
+    var regExpressionForCharacterOnly = /^[a-zA-Z \\s]+$/;
+
+    if (caidORssn.match(regExpressionForNumbersOnly)) {
+      var maxLength = 4;
+      if (target == "CAID")
+        maxLength = 8;
+
+      if (target == "SSN") {
+        if (caidORssn.length != maxLength) {
+          errorMessage("<p style='color:red'>Not a valid " + target + "</p>", target);
+          return;
+        }
+      }
+
+
+      jQuery.ajax({
+        url: pathApplicantPin + "/applicantPINRetrievalController",
+        data: { lastname: lastname, caidORssn: caidORssn, target: target },
+        cache: false,
+        dataType: "json",
+        success: function (response) {
+
+          if (response.error == true) {
+            errorMessage("<p style='color:red'>" + response.message + "</p>", target);
+            //resetAll();	
+          }
+          else {
+            var msg = "<p style='color:#646464'>Last Name <strong>" + lastname + "</strong><br> Username <strong>" + response.id + "</strong> <br> text <strong>" + response.pin + "</strong></p><br><a id='mysandiegoLoginLink' class='mysandiegoLoginLink' href='https://my.sandiego.edu' target='_blank'>Login to MySandiego</a><br><br>";
+            errorMessage(msg, target);
+          }
+        },
+        error: function () { alert("error occured while processing your request, please text to mysandiego@sandiego.edu!"); }
+      });
+    }
+    else {
+      errorMessage("<p style='color:red'>Not a valid " + target + "</p>", target);
+      return;
+    }
+  }
+
+
+  /* 
+Get Applicant Pin End
+
+*/
+
+
+
+</script>
+<style>
+
+  .appStoreFilterLabel {
+    width: 100%;
+    display: -ms-inline-grid;
+    margin: 0;
+  }
+  .appStoreFilterLabel > input {
+    padding: 1.5em;
+    width: 100%;
+    height: 4em;
+    font-size: 1em;
+    background-image: url('https://www.sandiego.edu/mysandiego/portal/img/search-gray.png');
+    background-repeat: no-repeat;
+    background-position: 1em center;
+    background-size: 2em 2em;
+    padding-left: 3.5em;
+  }
+  div.dataTables_wrapper div.dataTables_filter input {
+    width: 100%;
+    border-radius: .5em;
+    margin:0;
+  }
+
+  #appStoreTable tr:last-child {
+    opacity: .5
+    }
+    #appStoreTable tr:last-child:hover {
+    opacity: 1
+    }
+</style>
+<body>
+  <app-root></app-root>
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="scripts.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
+</html>
